@@ -1,0 +1,16 @@
+
+<table>
+  <tr>
+    <th>Tasks</th>
+    <th>Deadline</th>
+    <th>Tags</th>
+  </tr>
+    <tr>
+      <td><%= @article.task %></td>
+      <td><%= @article.deadline %></td>
+      <td><%= raw @article.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+    </tr>
+</table>
+<%= link_to 'Edit', edit_user_article_path %> |
+
+<%= link_to 'Back', user_articles_path(@user) %>

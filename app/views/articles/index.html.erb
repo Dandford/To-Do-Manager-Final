@@ -1,0 +1,27 @@
+
+<h1>Listing Tasks</h1>
+<%= form_tag(user_articles_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search by Tags or Tasks', name: nil %>
+<% end %>
+ <%= link_to 'New Entry', new_user_article_path(@user), :class => 'button' %>
+<table>
+  <tr>
+    <th>Tasks</th>
+    <th>Deadline</th>
+    <th>Tags</th>
+  </tr>
+ 
+  <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.task %></td>
+      <td><%= article.deadline %></td>
+      <td><%= raw article.tags.map(&:name).join(', ') %></td>
+      <td><%= link_to 'Show', user_article_path(user_id: article.user.id, id: article.id) %></td>
+      <td><%= link_to 'Edit', edit_user_article_path(user_id: article.user.id, id: article.id) %></td>
+      <td><%= link_to 'Destroy', user_article_path(user_id: article.user.id, id: article.id),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
